@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
@@ -11,7 +12,7 @@ const PORT = 3000;
 // cors buat nyambungin be dengan fe //
 app.use(cors({
   origin: "https://frontendryuu.vercell.app",
-  Credential: true
+  credential: true
 }));
 
 // === Connect MongoDB ===
