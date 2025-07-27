@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Ambil session user
-  fetch("/session-user")
+  fetch("https://backendryuu.railway.app/session-user")
     .then((res) => res.json())
     .then((data) => {
       if (data.loggedIn) {
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tracks.forEach(track => track.style.animationPlayState = 'running');
   });
 
-  fetch('/comments')
+  fetch('https://backendryuu.railway.app/comments')
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById('commentList');
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const content = document.getElementById('commentInput').value;
 
-    fetch('/comments', {
+    fetch('https://backendryuu.railway.app/comments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content })
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let userLoggedIn = false;
 
-  fetch("/session-user")
+  fetch("https://backendryuu.railway.app/session-user")
     .then(res => res.json())
     .then(data => {
       console.log(data);
@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Load komentar
-  fetch('/comments')
+  fetch('https://backendryuu.railway.app/comments')
     .then(res => res.json())
     .then(data => renderComments(data));
 
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = e.target.dataset.id;
       const content = document.querySelector(`#reply-${id} .reply-text`).value;
 
-      fetch('/comment', {
+      fetch('https://backendryuu.railway.app/comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, parentId: id })
@@ -277,6 +277,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+
 
   document.querySelectorAll(".reply-text").forEach((textarea) => {
     textarea.addEventListener("keydown", (e) => {

@@ -215,7 +215,7 @@
   </div>
 
   <script>
-    fetch('/api/profile')
+    fetch('https://backendryuu.railway.app/api/profile')
       .then(res => res.json())
       .then(data => {
         document.getElementById('username').innerText = data.username;
@@ -223,7 +223,7 @@
         document.getElementById('password').value = data.password || '******';
       });
 
-    fetch('/api/profile/comments')
+    fetch('https://backendryuu.railway.app/api/profile/comments')
       .then(res => res.json())
       .then(comments => {
         const list = document.getElementById('commentList');
@@ -242,7 +242,7 @@
 
     function changePassword() {
       const newPass = document.getElementById('password').value;
-      fetch('/api/profile/password', {
+      fetch('https://backendryuu.railway.app/api/profile/password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: newPass })
@@ -258,7 +258,7 @@
       const formData = new FormData();
       formData.append('profileImage', file);
 
-      fetch('/upload-photo', {
+      fetch('https://backendryuu.railway.app/upload-photo', {
         method: 'POST',
         body: formData
       }).then(res => {
