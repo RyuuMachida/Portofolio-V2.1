@@ -1,7 +1,0 @@
-.env
-routes/
-models/
-package-lock.json
-package.json
-server.js
-node_modules/
