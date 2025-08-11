@@ -800,7 +800,7 @@ body {
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .tech-row-title {
     font-size: 12px;
-    text-align: center;
+    text-align: left;
     padding-left: 0;
     margin-bottom: 20px;
   }
@@ -1256,7 +1256,7 @@ body {
   }
 
   .hero-img {
-    filter: none;
+    filter: blur(1.5px);
     /* Consistent blur on mobile, no hover effects */
   }
 }
@@ -1763,6 +1763,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
   }
 
   .social-icons a:hover {
