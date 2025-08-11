@@ -1,4 +1,4 @@
-require ('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -44,37 +44,93 @@ app.get('/session-user', (req, res) => {
   }
 });
 
+// GANTI DENGAN INI (Cloudinary):
 const multer = require('multer');
-const fs = require('fs');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'public/assets/img/user-uploads'),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const fileName = req.session.user.username + '-' + Date.now() + ext;
-    cb(null, fileName);
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'profile-pictures',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+    transformation: [
+      { width: 500, height: 500, crop: 'fill', quality: 'auto' }
+    ]
   }
 });
 
 const upload = multer({ storage });
+const User = require('./models/User');
 
+// UPDATE route upload juga:
 app.post('/upload-photo', upload.single('profileImage'), async (req, res) => {
   if (!req.session.user) return res.status(401).send('Unauthorized');
 
-  const user = await User.findOne({ email: req.session.user.email });
-  user.logo = '/assets/img/user-uploads/' + req.file.filename;
-  await user.save();
+  try {
+    const user = await User.findOne({ email: req.session.user.email });
 
-  req.session.user.logo = user.logo;
-  res.sendStatus(200);
+    // YANG INI YANG PENTING - req.file.path itu Cloudinary URL
+    user.logo = req.file.path; // Cloudinary URL, bukan local path
+    await user.save();
+
+    // Update session
+    req.session.user.logo = user.logo;
+
+    console.log('Cloudinary URL saved:', req.file.path); // Debug
+
+    res.json({
+      success: true,
+      imageUrl: user.logo
+    });
+
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: 'Upload failed' });
+  }
+});
+
+
+// Update route upload
+app.post('/upload-photo', upload.single('profileImage'), async (req, res) => {
+  if (!req.session.user) return res.status(401).send('Unauthorized');
+
+  try {
+    const user = await User.findOne({ email: req.session.user.email });
+
+    // Ganti dari local path ke Cloudinary URL
+    user.logo = req.file.path; // Cloudinary URL otomatis
+    await user.save();
+
+    // Update session
+    req.session.user.logo = user.logo;
+
+    // Return success dengan URL
+    res.json({
+      success: true,
+      imageUrl: user.logo
+    });
+
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: 'Upload failed' });
+  }
 });
 
 const commentRoutes = require('./routes/comment');
 app.use('/', commentRoutes);
 
 // === Start Server ===
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 Server was RUNNING localhost://${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`🚀 Server was RUNNING at http://localhost:${PORT}`);
 });
 
 function requireLogin(req, res, next) {
@@ -84,12 +140,16 @@ function requireLogin(req, res, next) {
   next();
 }
 
-app.get('/dashboard', requireLogin, (req, res) => {
-  res.send('Halaman dashboard ini cuma bisa diakses kalau udah login!');
-});
+function isLoggedIn(req, res, next) {
+  console.log("Session:", req.session); // DEBUG di sini
+  if (req.session && req.session.user) {
+    return next();
+  } else {
+    res.send("Halaman dashboard ini cuma bisa diakses kalau udah login!");
+  }
+}
 
 const profileRoutes = require('./routes/profile');
-const User = require('./models/User'); // atau sesuaikan path-nya kalau beda
 app.use('/api/profile', profileRoutes);
 
 // Route: GET profile info

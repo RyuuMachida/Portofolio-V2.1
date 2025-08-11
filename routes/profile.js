@@ -3,7 +3,29 @@ const router = express.Router();
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const multer = require('multer');
-const path = require('path');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'profile-pictures',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+    transformation: [
+      { width: 500, height: 500, crop: 'fill', quality: 'auto' }
+    ]
+  }
+});
+
+const upload = multer({ storage });
 
 // Middleware cek login
 function requireLogin(req, res, next) {
@@ -19,7 +41,7 @@ router.get('/', requireLogin, async (req, res) => {
   res.json({
     username: user.username,
     profilePic: user.logo,
-    password: user.password, // tampilkan hanya jika sangat diperlukan
+    password: user.password,
   });
 });
 
@@ -36,22 +58,32 @@ router.post('/password', requireLogin, async (req, res) => {
   res.sendStatus(200);
 });
 
-// === UPLOAD PROFILE PICTURE ===
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'public/uploads/'),
-  filename: (req, file, cb) => {
-    const unique = Date.now() + path.extname(file.originalname);
-    cb(null, req.session.user.username + '-' + unique);
+// === UPLOAD PHOTO ===
+router.post('/upload-photo', requireLogin, upload.single('profileImage'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const user = await User.findOne({ email: req.session.user.email });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    
+    // Cloudinary URL otomatis
+    user.logo = req.file.path;
+    await user.save();
+
+    // Update session
+    req.session.user.logo = user.logo;
+    
+    res.json({ 
+      success: true, 
+      imageUrl: user.logo 
+    });
+    
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: 'Upload failed' });
   }
-});
-
-const upload = multer({ storage });
-
-router.post('/picture', requireLogin, upload.single('profilePic'), async (req, res) => {
-  const imagePath = '/uploads/' + req.file.filename;
-  await User.updateOne({ email: req.session.user.email }, { logo: imagePath });
-  req.session.user.logo = imagePath; // update session juga
-  res.sendStatus(200);
 });
 
 module.exports = router;

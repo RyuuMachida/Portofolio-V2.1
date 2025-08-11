@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portofolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ======================================= -->
+  <!--    META TAGS KHUSUS WHATSAPP PREVIEW    -->
+  <!-- ======================================= -->
+
+  <!-- Basic Meta -->
+  <title>Ariel Evan Arpansyah - Web Developer 🔧</title>
+  <meta name="description"
+    content="Haloo! Saya Ariel Evan Arpansyah, Web Developer yang fokus di frontend dan backend. Suka eksplor teknologi baru dan senang nyanyi! Student of Infokom 🎓">
+
+  <!-- Open Graph untuk WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Portfolio Ariel Evan">
+  <meta property="og:title" content="Ariel Evan Arpansyah - Web Developer 🔧✨">
+  <meta property="og:description"
+    content="Haloo! Saya Web Developer yang fokus frontend & backend 💻 Student of Infokom yang suka eksplor teknologi baru dan nyanyi 🎵 Mari berkenalan!">
+  <meta property="og:url" content="https://portofoliov2-production-ca53.up.railway.app/">
+
+  <!-- Gambar Preview untuk WhatsApp (YANG PALING PENTING!) -->
+  <meta property="og:image" content="https://portofoliov2-production-ca53.up.railway.app/whatsapp-preview.png">
+  <meta property="og:image:secure_url"
+    content="https://portofoliov2-production-ca53.up.railway.app/whatsapp-preview.png"> 
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ariel Evan Arpansyah - Web Developer Portfolio">
+
+  <!-- Locale Indonesia -->
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter Card (bonus, kadang WhatsApp baca ini juga) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ariel Evan - Web Developer 🔧">
+  <meta name="twitter:description"
+    content="Student of Infokom | Frontend & Backend Developer | Suka teknologi baru & nyanyi 🎵">
+  <meta name="twitter:image" content="https://portofoliov2-production-ca53.up.railway.app/images/whatsapp-preview.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -17,6 +55,7 @@
   <!-- NAVBAR -->
   <header class="navbar" id="mainNavbar">
     <div class="nav-left">
+      <button class="hamburger">☰</button>
       <!-- LOGO: default dulu, akan diganti lewat JS -->
       <img src="assets/img/default-logo.png" id="logo" class="logo" />
       <span id="displayName" class="display-name">Hi, Guest!</span>
@@ -41,7 +80,76 @@
   <section id="home" class="intro">
     <img src="assets/img/foto-ariel.jpg" alt="Foto Ariel" class="profile-pic" />
     <h1 class="intro-text"><span id="typewriter-text"></span></h1>
+    <p class="intro-desc">
+      Saya seorang webDev🔧 yang fokus di frontend dan backend, suka eksplor teknologi baru, dan senang nyanyi.<br>
+      <strong>Senang Bertemu Anda!</strong>
+    </p>
   </section>
+
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-left">
+        <h1 class="hero-name">EVAN</h1>
+        <div class="hero-info">
+          <h2>Ariel Evan Arpansyah</h2>
+          <p class="job-title">Student Of Infokom</p>
+          <p>+62 838-1366-0206</p>
+        </div>
+        <div class="hero-socials">
+          <a href="https://tiktok.com/@rilss_ear1" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a href="https://instagram.com/rilss_ear1" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/RyuuMachida" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://t.me/rilss_ear1" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-img-container">
+          <img src="assets/img/foto1.jpg" alt="Foto utama" class="hero-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2 class="section-title">About Me🧑‍💻</h2>
+
+    <div class="about-container">
+      <!-- Kotak 1: Data Pribadi -->
+      <div class="about-card">
+        <h3>Data Pribadi</h3>
+        <ul>
+          <li><strong>Nama Lengkap:</strong> Ariel Evan ar.</li>
+          <li><strong>Tanggal Lahir:</strong> 15 April 2010</li>
+          <li><strong>Negara:</strong> Indonesia</li>
+          <li><strong>Kota:</strong> Jakarta</li>
+        </ul>
+      </div>
+
+      <!-- Kotak 2: Hobi -->
+      <div class="about-card">
+        <h3>Hobi & Minat</h3>
+        <ul>
+          <li>Ngoding Web & App</li>
+          <li>Desain UI/UX</li>
+          <li>Fotografi</li>
+          <li>Editor Video</li>
+          <li>Gaming</li>
+        </ul>
+      </div>
+
+      <!-- Kotak 3: Lainnya -->
+      <div class="about-card">
+        <h3>Lainnya</h3>
+        <ul>
+          <li><strong>Skill Utama:</strong> HTML, CSS, JavaScript</li>
+          <li><strong>Bahasa:</strong> Indonesia, Inggris</li>
+          <li><strong>Motto:</strong> "Build. Break. Learn. Repeat."</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 
   <div class="glow" id="glow1" style="top:0; left:0;"></div>
   <div class="glow" id="glow2" style="top:0; right:0;"></div>
@@ -67,6 +175,14 @@
       <div class="tech-box"><img src="assets/LOGO/apps/mongodb-compass.png" alt="MongoDB Compass" /></div>
       <div class="tech-box"><img src="assets/LOGO/apps/git.png" alt="GIT" /></div>
       <div class="tech-box"><img src="assets/LOGO/apps/github.png" alt="GITHUB" /></div>
+
+      <div class="tech-box"><img src="assets/LOGO/apps/vscode.png" alt="VSCode" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/acode.png" alt="ACode" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/chatgpt.png" alt="ChatGPT" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/alightmotion.png" alt="AlightMotion" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/mongodb-compass.png" alt="MongoDB Compass" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/git.png" alt="GIT" /></div>
+      <div class="tech-box"><img src="assets/LOGO/apps/github.png" alt="GITHUB" /></div>
     </div>
 
     <!-- 💻 FRONTEND -->
@@ -80,11 +196,26 @@
         <img src="assets/LOGO/frontend/react.png" alt="React" />
         <span class="soon-tag">[ soon 😎 ]</span>
       </div>
+
+      <div class="tech-box"><img src="assets/LOGO/frontend/html.png" alt="HTML" /></div>
+      <div class="tech-box"><img src="assets/LOGO/frontend/css.png" alt="CSS" /></div>
+      <div class="tech-box"><img src="assets/LOGO/frontend/javascript.png" alt="JavaScript" /></div>
+      <div class="tech-box"><img src="assets/LOGO/frontend/tailwind.png" alt="Tailwind CSS" /></div>
+      <div class="tech-box">
+        <img src="assets/LOGO/frontend/react.png" alt="React" />
+        <span class="soon-tag">[ soon 😎 ]</span>
+      </div>
     </div>
 
     <!-- 🖥️ BACKEND -->
     <h2 class="tech-row-title">🖥️ Backend</h2>
     <div class="tech-marquee" id="backendTrack">
+      <div class="tech-box"><img src="assets/LOGO/backend/nodejs.png" alt="Node.js" /></div>
+      <div class="tech-box"><img src="assets/LOGO/backend/express.png" alt="Express.js" /></div>
+      <div class="tech-box"><img src="assets/LOGO/backend/mongodb.png" alt="MongoDB" /></div>
+      <div class="tech-box"><img src="assets/LOGO/backend/socket-io.png" alt="Socket.io" /></div>
+      <div class="tech-box"><img src="assets/LOGO/backend/jwt.png" alt="JWT Auth" /></div>
+
       <div class="tech-box"><img src="assets/LOGO/backend/nodejs.png" alt="Node.js" /></div>
       <div class="tech-box"><img src="assets/LOGO/backend/express.png" alt="Express.js" /></div>
       <div class="tech-box"><img src="assets/LOGO/backend/mongodb.png" alt="MongoDB" /></div>
@@ -127,7 +258,7 @@
     </div>
 
     <footer>
-      
+
     </footer>
 
     <!-- SCRIPT -->
