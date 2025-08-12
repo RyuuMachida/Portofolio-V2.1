@@ -166,8 +166,10 @@ body {
   background-color: rgba(15, 15, 15, 0.301);
   backdrop-filter: blur(1px);
 }
+
 .hamburger {
-  display: none; /* Hide by default */
+  display: none;
+  /* Hide by default */
   background: none;
   border: none;
   color: white;
@@ -206,11 +208,13 @@ body {
   }
 
   /* Hide desktop nav center on mobile, show hamburger menu */
-/* Hide desktop nav center on mobile, show as hamburger menu */
+  /* Hide desktop nav center on mobile, show as hamburger menu */
   .nav-center {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
-    top: 100%; /* Below navbar */
+    top: 100%;
+    /* Below navbar */
     left: 0;
     width: 30%;
     height: 100%;
@@ -235,16 +239,18 @@ body {
   }
 
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
   /* Nav Left - Logo area */
   .nav-left {
     flex: 1;
@@ -628,14 +634,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 15%;
   color: white;
   text-align: center;
 }
 
 .profile-pic {
   width: 140px;
-  top: 100%;
+  top: 20%;
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
@@ -651,7 +657,7 @@ body {
 /* Android Mobile Intro */
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .intro {
-    margin-top: 18%;
+    margin-top: 50%;
     padding: 0 20px;
   }
 
@@ -927,10 +933,10 @@ body {
 /* Android Mobile Section Title */
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .section-title {
-    font-size: 12px;
-    text-align: center;
+    font-size: 1px;
+    text-align: left;
     padding-left: 0;
-    margin-bottom: 20px;
+    margin-top: 30%;
   }
 }
 
@@ -1254,11 +1260,6 @@ body {
     max-width: 280px;
     border-radius: 12px;
   }
-
-  .hero-img {
-    filter: blur(1.5px);
-    /* Consistent blur on mobile, no hover effects */
-  }
 }
 
 /* Tablet Portrait */
@@ -1330,44 +1331,48 @@ body {
   }
 }
 
-/* ================================
-   COMMENT SECTION - ANDROID MOBILE
-================================= */
+:root {
+  --primary-purple: #8a2be2;
+  --dark-purple: #4b0082;
+  --dark-bg: #0f051a;
+  --darker-bg: #0a0312;
+  --card-bg: #1a0a2e;
+  --text-light: #e2d9f3;
+  --text-muted: #b19cd9;
+}
+
 .comments-container {
   max-width: 700px;
   margin: 100px auto;
   padding: 30px;
-  background-color: #33303065;
+  background-color: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.15);
-}
-
-/* Android Mobile Comments */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .comments-container {
-    margin: 40px 10px;
-    padding: 15px;
-    border-radius: 8px;
-  }
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  box-shadow: 0 0 18px rgba(138, 43, 226, 0.1);
 }
 
 .comments-title {
-  font-size: 22px;
-  color: #fff;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #333;
+  font-size: 2rem;
+  background: linear-gradient(90deg, var(--primary-purple), #ff00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
   padding-bottom: 10px;
 }
 
-/* Android Mobile Comments Title */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .comments-title {
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
+.comments-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
 }
 
-/* List komentar */
 .comment-list {
   list-style: none;
   padding: 0;
@@ -1375,224 +1380,190 @@ body {
 }
 
 .comment-list li {
-  background-color: #1a1a1a;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border-left: 4px solid #a855f7;
-  transition: background-color 0.3s ease;
+  background-color: var(--darker-bg);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--primary-purple);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.1);
 }
 
 .comment-list li:hover {
-  background-color: #222;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(138, 43, 226, 0.15);
 }
 
 .comment-list li strong {
   display: block;
-  color: #a855f7;
+  color: var(--primary-purple);
   margin-bottom: 5px;
   font-size: 15px;
 }
 
-/* Android Mobile Comment List */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .comment-list li {
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-  }
-
-  .comment-list li strong {
-    font-size: 14px;
-  }
-}
-
-/* Form komentar */
 .comment-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background-color: var(--card-bg);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  padding: 20px;
+  border-radius: 12px;
 }
 
 .comment-form textarea {
-  background-color: #1a1a1a;
-  color: #fff;
-  border: 1px solid #333;
+  background-color: var(--darker-bg);
+  color: white;
+  border: 1px solid rgba(138, 43, 226, 0.3);
   border-radius: 8px;
-  padding: 12px;
+  padding: 14px;
   font-size: 14px;
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
+  transition: all 0.3s ease;
 }
 
 .comment-form textarea:focus {
   outline: none;
-  border-color: #a855f7;
-  box-shadow: 0 0 4px rgba(168, 85, 247, 0.5);
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.3);
 }
 
 .comment-form button {
   align-self: flex-end;
-  background-color: #a855f7;
-  color: #fff;
-  padding: 8px 20px;
+  background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+  color: white;
+  padding: 10px 20px;
   font-weight: bold;
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .comment-form button:hover {
-  background-color: #9333ea;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
 }
 
-/* Android Mobile Comment Form */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .comment-form textarea {
-    padding: 10px;
-    font-size: 16px;
-    /* Prevent zoom pada Android */
-    min-height: 70px;
-    border-radius: 6px;
-  }
-
-  .comment-form button {
-    align-self: stretch;
-    padding: 12px 20px;
-    font-size: 14px;
-    min-height: 48px;
-  }
-}
-
-.reply-box textarea {
-  width: 100%;
-  margin-top: 5px;
-}
-
-.reply-box button {
-  margin-top: 4px;
-  background-color: #a855f7;
-  color: white;
-  border: none;
-  padding: 4px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.reply-btn {
-  background: none;
-  border: none;
-  color: #a855f7;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 13px;
-}
-
-/* Komentar utama */
-.comment-box {
-  background-color: #111;
-  border: 1px solid #333;
-  border-left: 4px solid #a855f7;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 14px;
-  color: #eee;
-}
-
-/* Android Mobile Comment Box */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .comment-box {
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-}
-
-/* Balasan (nested komentar) */
+/* Nested replies */
 .reply-box-container {
   margin-top: 10px;
   margin-left: 30px;
-  padding-left: 12px;
-  border-left: 2px dashed #a855f766;
+  padding-left: 15px;
+  border-left: 2px dashed rgba(138, 43, 226, 0.4);
 }
 
-/* Android Mobile Reply Container */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .reply-box-container {
-    margin-left: 15px;
-    padding-left: 8px;
-  }
-}
-
-/* Area tulis balasan */
+/* Reply textarea */
 .reply-box textarea {
   width: 100%;
-  border-radius: 6px;
-  border: 1px solid #444;
-  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  padding: 10px;
   font-size: 14px;
-  background-color: black;
-  color: purple;
+  background-color: var(--darker-bg);
+  color: var(--text-light);
   resize: vertical;
 }
 
-/* Android Mobile Reply Textarea */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .reply-box textarea {
-    font-size: 16px;
-    /* Prevent zoom pada Android */
-    padding: 8px 10px;
-  }
-}
-
-/* Tombol kirim balasan */
+/* Reply submit button */
 .reply-box button.send-reply {
   margin-top: 8px;
-  background-color: #a855f7;
+  background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
   color: white;
   border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .reply-box button.send-reply:hover {
-  background-color: #9333ea;
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
 }
 
-/* Android Mobile Send Reply Button */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .reply-box button.send-reply {
-    padding: 8px 16px;
-    font-size: 14px;
-    min-height: 44px;
-  }
-}
-
-/* Tombol "Balas" kecil */
+/* Reply button */
 .reply-btn {
   background: none;
   border: none;
-  color: #a855f7;
+  color: var(--primary-purple);
   font-size: 13px;
   margin-left: 6px;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .reply-btn:hover {
+  color: white;
   text-decoration: underline;
 }
 
-/* Android Mobile Reply Button */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .reply-btn {
-    font-size: 12px;
-    margin-left: 4px;
-    padding: 5px;
-    min-height: 36px;
+/* Pop-up warning */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 5, 26, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: var(--text-light);
+}
+
+.popup-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.popup-btn {
+  background: var(--primary-purple);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.popup-btn:hover {
+  background: #6b21a8;
+}
+
+.popup-btn.cancel {
+  background: transparent;
+  border: 1px solid var(--primary-purple);
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .comments-container {
+    margin: 40px 10px;
+    padding: 15px;
+  }
+
+  .comment-form textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .comment-form button {
+    padding: 8px 16px;
+    font-size: 14px;
   }
 }
 
@@ -2188,12 +2159,475 @@ body {
     margin-right: 8px;
   }
 }
+
 @media screen and (max-width: 480px) {
   .nav-center {
     display: none !important;
   }
-  
+
   .nav-center.mobile-open {
     display: flex !important;
+  }
+}
+
+/* Styling untuk Projects Section */
+#project {
+  padding: 60px 15px;
+  background: none;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+.projects-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  cursor: pointer;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.project-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 30px rgba(0, 245, 255, 0.2);
+  border-color: rgba(0, 245, 255, 0.5);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.project-image::after {
+  content: normal;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+/* Project Images */
+.project-1 {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+.project-2 {
+  background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+}
+
+.project-3 {
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.project-4 {
+  background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.project-content {
+  padding: 18px;
+  color: white;
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.project-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.project-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.project-tag:hover {
+  background: rgba(0, 245, 255, 0.2);
+  border-color: rgba(0, 245, 255, 0.5);
+}
+
+.project-buttons {
+  display: flex;
+  gap: 9px;
+}
+
+.project-btn {
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-demo {
+  background: linear-gradient(45deg, #00f5ff, #0080ff);
+  color: white;
+}
+
+.btn-demo:hover {
+  background: linear-gradient(45deg, #0080ff, #00f5ff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 245, 255, 0.4);
+}
+
+.btn-code {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-code:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-file {
+  background: rgba(255, 0, 128, 0.2);
+  color: #ff0080;
+  border: 1px solid rgba(255, 0, 128, 0.4);
+}
+
+.btn-file:hover {
+  background: rgba(255, 0, 128, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .project-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.project-card:nth-child(1) {
+  animation: float 6s ease-in-out infinite;
+}
+
+.project-card:nth-child(2) {
+  animation: float 6s ease-in-out infinite 1.5s;
+}
+
+.project-card:nth-child(3) {
+  animation: float 6s ease-in-out infinite 3s;
+}
+
+.project-card:nth-child(4) {
+  animation: float 6s ease-in-out infinite 4.5s;
+}
+
+/* Footer Styles */
+footer {
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 60px 20px 30px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00f5ff, #ff0080, transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.footer-section {
+  color: white;
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #00f5ff, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-section p,
+.footer-section li {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.footer-section a:hover {
+  color: #00f5ff;
+  padding-left: 10px;
+}
+
+.footer-section a i {
+  width: 20px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+}
+
+.footer-social a:hover {
+  background: rgba(0, 245, 255, 0.2);
+  border-color: rgba(0, 245, 255, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+  padding-left: 0;
+}
+
+.footer-bottom {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(138, 86, 180, 0.349);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-bottom p {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.footer-love {
+  color: #ff0080;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.footer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  max-width: 120px;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00f5ff;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 8px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 15px 20px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer-section a {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-stats {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .stat-item {
+    max-width: none;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .footer-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 35px;
+  }
+
+  .footer-stats {
+    gap: 30px;
   }
 }
