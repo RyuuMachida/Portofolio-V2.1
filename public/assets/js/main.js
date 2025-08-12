@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ================================
-  //   LAZY ANIMATION - INTERSECTION OBSERVER
+  //   LAZY ANIMATION - INTERSECTION OBSERVER (FIXED)
   // ================================
 
   // Configuration for intersection observer
@@ -315,13 +315,13 @@ document.addEventListener("DOMContentLoaded", () => {
     rootMargin: '0px 0px -50px 0px'
   };
 
-  // Create intersection observer
-  const observer = new IntersectionObserver((entries) => {
+  // Create intersection observer for lazy animations
+  const lazyAnimationObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate');
         handleSpecialAnimations(entry.target);
-        observer.unobserve(entry.target);
+        lazyAnimationObserver.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start observing elements
   elementsToObserve.forEach(selector => {
     const elements = document.querySelectorAll(selector);
-    elements.forEach(el => observer.observe(el));
+    elements.forEach(el => lazyAnimationObserver.observe(el));
   });
 
   // Handle special animations
@@ -505,5 +505,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // ================================
+  //   PROJECT CARD ANIMATIONS (FIXED)
+  // ================================
+
+  // Project card click effects
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', function () {
+      this.style.transform = 'translateY(-15px) scale(1.02)';
+    });
+
+    card.addEventListener('mouseleave', function () {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+
+  // Create separate observer for project cards with different options
+  const projectObserverOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        projectObserver.unobserve(entry.target);
+      }
+    });
+  }, projectObserverOptions);
+
+  // Observe all project cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(50px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    projectObserver.observe(card);
+  });
 
 });
