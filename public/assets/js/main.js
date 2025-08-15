@@ -545,4 +545,56 @@ document.addEventListener("DOMContentLoaded", () => {
     projectObserver.observe(card);
   });
 
+  const urlElement = document.getElementById('typing-url');
+  const fullUrl = 'https://www.portfolio-website.com/home/projects/about/contact/services';
+  let currentIndex = 0;
+  let isScrolling = false;
+
+  function typeUrl() {
+    if (!isScrolling && currentIndex < fullUrl.length) {
+      urlElement.textContent = fullUrl.substring(0, currentIndex + 1);
+      currentIndex++;
+      setTimeout(typeUrl, 80);
+    } else if (!isScrolling) {
+      // Setelah selesai typing, mulai scrolling
+      isScrolling = true;
+      setTimeout(scrollUrl, 1000); // Tunggu 1 detik sebelum scroll
+    }
+  }
+
+  function scrollUrl() {
+    const urlDisplay = urlElement.parentElement;
+    const maxScroll = Math.max(0, urlElement.offsetWidth - urlDisplay.offsetWidth + 100);
+    let scrollPosition = 0;
+    const scrollSpeed = 1.5;
+
+    function scroll() {
+      if (scrollPosition < maxScroll) {
+        scrollPosition += scrollSpeed;
+        urlElement.style.transform = `translateX(-${scrollPosition}px)`;
+        requestAnimationFrame(scroll);
+      } else {
+        // Setelah selesai scroll, reset dan ulangi
+        setTimeout(() => {
+          currentIndex = 0;
+          isScrolling = false;
+          urlElement.textContent = '';
+          urlElement.style.transform = 'translateX(0px)';
+          setTimeout(typeUrl, 500);
+        }, 2000);
+      }
+    }
+    scroll();
+  }
+
+  // Mulai typing animation setelah delay
+  setTimeout(typeUrl, 2000);
+
+  // Auto hide preloader after 10 seconds dengan fade out yang smooth
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('fade-out');
+    setTimeout(() => {
+      document.getElementById('preloader').style.display = 'none';
+    }, 1200); // Tunggu sampai fade selesai
+  }, 10000);
 });
