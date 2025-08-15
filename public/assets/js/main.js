@@ -545,6 +545,20 @@ document.addEventListener("DOMContentLoaded", () => {
     projectObserver.observe(card);
   });
 
+  // ================================
+  //   PRELOADER - BLOCK MAIN CONTENT
+  // ================================
+
+  // Add class to body to block main content
+  document.body.classList.add('preloader-active');
+
+  // Disable scroll and interaction
+  document.body.style.overflow = 'hidden';
+  document.body.style.height = '100vh';
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+
+  // Preloader URL typing animation
   const urlElement = document.getElementById('typing-url');
   const fullUrl = 'https://www.portfolio-website.com/home/projects/about/contact/services';
   let currentIndex = 0;
@@ -590,11 +604,48 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mulai typing animation setelah delay
   setTimeout(typeUrl, 2000);
 
-  // Auto hide preloader after 10 seconds dengan fade out yang smooth
-  setTimeout(() => {
-    document.getElementById('preloader').classList.add('fade-out');
+  // Preloader completion function
+  function completePreloader() {
+    const preloader = document.getElementById('preloader');
+
+    // Start fade out
+    preloader.classList.add('fade-out');
+
     setTimeout(() => {
-      document.getElementById('preloader').style.display = 'none';
-    }, 1200); // Tunggu sampai fade selesai
-  }, 10000);
+      // Hide preloader completely
+      preloader.style.display = 'none';
+
+      // Remove blocking class and styles
+      document.body.classList.remove('preloader-active');
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+
+      // Show main content with smooth animation
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.8s ease';
+
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+
+        // Clean up transition after animation
+        setTimeout(() => {
+          document.body.style.transition = '';
+        }, 800);
+      }, 100);
+
+    }, 1200); // Wait for fade transition
+  }
+
+  // Auto complete preloader after 10 seconds
+  setTimeout(completePreloader, 10000);
+
+  // Optional: Add manual trigger for testing (remove in production)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && document.body.classList.contains('preloader-active')) {
+      completePreloader();
+    }
+  });
+
 });
