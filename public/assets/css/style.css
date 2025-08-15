@@ -2,12 +2,30 @@
    GLOBAL RESET & BASE
 ================================= */
 
+/* ================================
+   PRELOADER - BLOCK MAIN CONTENT
+================================= */
+
+/* Hide main content initially */
+body.preloader-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+/* Hide all main content during preloader */
+body.preloader-active>*:not(#preloader) {
+  display: none !important;
+}
+
+/* Preloader styles - make sure it covers everything */
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(-45deg, #131313, #1b003a, #000000, #0c0038);
   background-size: 400% 400%;
   animation: gradientBG 4s ease infinite;
@@ -15,13 +33,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 99999 !important;
+  /* Highest z-index */
   transition: opacity 1.2s ease;
+  overflow: hidden;
 }
 
 #preloader.fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Prevent any interaction with background elements */
+#preloader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
 }
 
 .preloader-icons {
