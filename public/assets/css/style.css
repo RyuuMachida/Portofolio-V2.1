@@ -34,28 +34,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(-45deg, #131313, #923cf5, #2e2e2e, #3d2f6e);
-  background-size: 400% 400%;
-  animation: gradientBG 8s ease infinite;
-}
-
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
 
 * {
   user-select: none;
@@ -130,9 +108,9 @@ body {
   font-weight: 600;
   color: #e0b2ff;
   text-shadow:
-    0 0 8px rgba(255, 150, 255, 0.5),
-    0 0 20px rgba(180, 80, 255, 0.4),
-    0 0 30px rgba(140, 0, 255, 0.3);
+  0 0 8px rgba(255, 150, 255, 0.5),
+  0 0 20px rgba(180, 80, 255, 0.4),
+  0 0 30px rgba(140, 0, 255, 0.3);
   filter: blur(1.3px);
   transition: transform 0.3s ease-out, opacity 0.4s ease;
   animation: floatUpDown 5s ease-in-out infinite;
@@ -167,12 +145,28 @@ body {
 
 body {
   margin: 0;
-  background: linear-gradient(135deg, #0e001a, #000000 60%);
+  padding: 0;
+  background: linear-gradient(-45deg, #131313, #1b003a, #000000, #0c0038);
   background-attachment: fixed;
   color: white;
   font-family: 'Space Grotesk', sans-serif;
+  animation: gradientBG 8s ease infinite;
+  background-size: 400% 400%;
 }
 
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /* ================================
    ANIMATIONS
 ================================= */
