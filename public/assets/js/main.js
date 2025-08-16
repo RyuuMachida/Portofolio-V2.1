@@ -560,7 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Preloader URL typing animation
   const urlElement = document.getElementById('typing-url');
-  const fullUrl = 'https://www.portfolio-website.com/home/projects/about/contact/services';
+  const fullUrl = 'https://portofolio-v21-production.up.railway.app/';
   let currentIndex = 0;
   let isScrolling = false;
 
